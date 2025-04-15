@@ -1,0 +1,61 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, build]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+env:
+  PYTHON_VERSION: "3.10"
+  NODE_LTS_VERSION: "22.x"
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "${{ env.PYTHON_VERSION }}"
+          cache: 'pip'
+      - name: Lint YAML
+        run: |
+          cd modules/validate-schema
+          pip install -r requirements.txt
+          ./validate.py ../../models.yaml ../models-schema.yaml
+
+  release:
+    needs: validate
+    runs-on: ubuntu-24.04
+    outputs:
+      released: ${{ steps.release-please.outputs.release_created }}
+      tag: ${{ steps.release-please.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release-please
+        with:
+          manifest-file: .github/release-please-manifest.json
+          config-file: .github/release-please-config.json
+
+  attach-assets:
+    needs: release
+    if: ${{ needs.release.outputs.released }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Attach assets to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for file in ./docs/*; do
+            gh release upload "${{ needs.release.outputs.tag }}" --clobber "${file}"
+          done
