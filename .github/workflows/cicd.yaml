@@ -27,6 +27,7 @@ jobs:
         with:
           manifest-file: .github/release-please-manifest.json
           config-file: .github/release-please-config.json
+          target-branch: ${{ github.ref_name }}
 
   attach-assets:
     needs: release
