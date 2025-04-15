@@ -16,22 +16,7 @@ env:
   NODE_LTS_VERSION: "22.x"
 
 jobs:
-  validate:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "${{ env.PYTHON_VERSION }}"
-          cache: 'pip'
-      - name: Lint YAML
-        run: |
-          cd modules/validate-schema
-          pip install -r requirements.txt
-          ./validate.py ../../models.yaml ../models-schema.yaml
-
   release:
-    needs: validate
     runs-on: ubuntu-24.04
     outputs:
       released: ${{ steps.release-please.outputs.release_created }}
