@@ -6,8 +6,10 @@ We MUST follow this guide. If there are circumstances when this is not possible,
 
 <!-- vim-markdown-toc GFM -->
 
+- [Planning Code Changes](#planning-code-changes)
 - [Documentation](#documentation)
 - [Comments](#comments)
+- [Import of Modules](#import-of-modules)
 - [Shell Scripts](#shell-scripts)
 - [Makefiles](#makefiles)
 - [Makefile Pattern](#makefile-pattern)
@@ -17,8 +19,19 @@ We MUST follow this guide. If there are circumstances when this is not possible,
 - [Front End Code](#front-end-code)
     - [Styling](#styling)
 - [PostgresSQL](#postgressql)
+- [Technical Debt](#technical-debt)
 
 <!-- vim-markdown-toc -->
+
+## Planning Code Changes
+
+Before making changes we SHOULD make at least a simple plan.
+
+We SHOULD implement APIs and interfaces before we create an implementation.
+
+We MUST look at existing code and attempt to follow conventions. For example, if we are adding a new React.js hook, we MUST look in our project to see if there are existing hooks. If so, we should follow existing patterns and conventions.
+
+When planning new features we MUST examine the codebase to see if our changes allow us to retire code which is no longer needed.
 
 ## Documentation
 
@@ -55,23 +68,27 @@ Good examples of READMEs:
 
 Prefer a `docs` folder for more detailed documentation such as configuration guides, installation guides and advanced features.
 
-Websites generated from Markdown documentation should be used for complex projects, here are good examples:
+Websites generated from Markdown documentation should be used for complex projects, here are two good examples:
 
 - https://www.tensorzero.com/docs/
 
-Example frameworks that support this:
-
-- https://starlight.astro.build/getting-started/
-
 ## Comments
 
-Comments should be short and should describe the _intent_ of code - i.e. _what_ we are trying to do. _How_ it is done is the code itself. However, if code is very complex, it is OK to help the reader by explaining what is going on.
+Comments SHOULD be short and should describe the _intent_ of code - i.e. _what_ we are trying to do. _How_ it is done is the code itself. However, if code is very complex, it is OK to help the reader by explaining what is going on.
 
-Comments should be written as sentences, capitalised and with full stops.
+Comments SHOULD be written as sentences, capitalised and with full stops.
+
+Comments MUST not describe changes we have made, such as 'change from an HTTP call to gRPC' - we describe the intent of code or its intent and meaning if it is complex.
 
 If you were to take a file and delete everything but the comments, you should still be able to follow the basic flow of what is going on. This is important; some readers will not know the programming language or will be more junior, they should be able to follow step by step, but not be overwhelmed with details or have lots of duplication of code and comment.
 
 Small comments can follow a line for a little bit of extra context, but use sparingly.
+
+## Import of Modules
+
+We MUST follow the idioms of the language when importing modules.
+
+We SHOULD import modules in the following order; built-in or very standard, third party modules, our own local code modules. However, we MUST prioritise standards for the language or the framework over this convention.
 
 ## Shell Scripts
 
@@ -252,3 +269,6 @@ Example projects that use these conventions that you can check for more details:
 - [Discourse](https://github.com/discourse/discourse/blob/main/db/structure.sql)
 - [Mastodon](https://github.com/mastodon/mastodon/blob/main/db/schema.rb)
 
+## Technical Debt
+
+Track technical debt in a document called `docs/tech-debt.md`.
