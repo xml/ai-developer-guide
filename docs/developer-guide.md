@@ -55,9 +55,13 @@ Good examples of READMEs:
 
 Prefer a `docs` folder for more detailed documentation such as configuration guides, installation guides and advanced features.
 
-Websites generated from Markdown documentation should be used for complex projects, here are two good examples:
+Websites generated from Markdown documentation should be used for complex projects, here are good examples:
 
 - https://www.tensorzero.com/docs/
+
+Example frameworks that support this:
+
+- https://starlight.astro.build/getting-started/
 
 ## Comments
 

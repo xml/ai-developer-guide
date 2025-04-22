@@ -14,6 +14,8 @@ If there is more simple way to make changes you should challenge me - especially
 
 You must ALWAYS steer me towards 'idiomatically correct' code - this means following the common conventions for the type of code or framework we are working with.
 
+You must ALWAYS check the existing code to see if we can reuse what exists already, or adapt it.
+
 ## How we follow a plan to execute changes
 
 When we have decided on an approach, it is ALWAYS better to break it into small chunks. Ideally we will:

@@ -2,11 +2,37 @@
 
 A set of standards, patterns and principles for development projects. Use with AI and your development team, evolve for your needs.
 
+<!-- vim-markdown-toc GFM -->
+
+- [Quickstart](#quickstart)
+    - [Visual Studio Code](#visual-studio-code)
+    - [Installing Your Own Guide](#installing-your-own-guide)
+- [Why do I need a Developer Guide?](#why-do-i-need-a-developer-guide)
+- [What's in a Guide?](#whats-in-a-guide)
+- [What about project specific stuff?](#what-about-project-specific-stuff)
+- [Build Your Own Guides!](#build-your-own-guides)
+
+<!-- vim-markdown-toc -->
+
 ## Quickstart
 
 The quickest way to let colleagues or AI agents know to use the developer guide is to use this prompt:
 
 > When we work on the codebase together your MUST follow the developer guide available at https://github.com/dwmkerr/developer-guide and follow the instructions in `docs/CONTRIBUTING.md`.
+
+It is then useful to ask for confirmation that the guide has been read and its intent understood.
+
+Below are some examples for specific tools and use cases.
+
+### Visual Studio Code
+
+Use [Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Point your agent at the developer guide repository, or your locally checked out version. I typically ask for confirmation that the guide has been read and its intent understood:
+
+> When we work on the codebase together your MUST follow the developer guide available at https://github.com/dwmkerr/developer-guide and follow the instructions in `docs/CONTRIBUTING.md`. **Confirm that you have read the guide and summarise its intent in three bullets.**
+
+![Screenshot of an introduction to how the developer guide works for Visual Studio Code](./.github/images/vscode.png)
+
+### Installing Your Own Guide
 
 To download your own copy of the guide to work on and edit run the script below, which will copy the files into a `developer-guide` folder in the current directory:
 
@@ -38,7 +64,9 @@ There are currently three essential artifacts:
 
 ## What about project specific stuff?
 
-If you have standards and patterns that are specific to your project, just add them into the same `developer-guide` folder and index them in the `CONTRIBUTING.md` file. This way you can keep your `developer-guide` repo as shared standards, update as needed, and keep your per-project guides separate.
+If you have standards and patterns that are specific to your project, just add them into the same `developer-guide` folder and index them in the `CONTRIBUTING.md` file. This way you can keep your `developer-guide` repo as shared standards, update as needed, and keep your per-project guides separate. There are also some suggestions for how to handle this in the [Examples](#examples).
+
+Increasingly, tools are allowing you to create local instructions for AI. A good example is [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) which supports a `CLAUDE.md` file. If you can, keep your project specifics in local files like this, and point to a shared developer guide.
 
 ## Build Your Own Guides!
 
