@@ -18,7 +18,11 @@ A set of standards, patterns and principles for development projects. Use with A
 
 The quickest way to let colleagues or AI agents know to use the developer guide is to use this prompt:
 
-> When we work on the codebase together your MUST follow the developer guide available at https://github.com/dwmkerr/developer-guide and follow the instructions in `docs/CONTRIBUTING.md`.
+```
+When we work on the codebase together your MUST follow the developer guide at:
+  https://github.com/dwmkerr/developer-guide
+and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
+```
 
 It is then useful to ask for confirmation that the guide has been read and its intent understood.
 
@@ -28,7 +32,12 @@ Below are some examples for specific tools and use cases.
 
 Use [Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Point your agent at the developer guide repository, or your locally checked out version. I typically ask for confirmation that the guide has been read and its intent understood:
 
-> When we work on the codebase together your MUST follow the developer guide available at https://github.com/dwmkerr/developer-guide and follow the instructions in `docs/CONTRIBUTING.md`. **Confirm that you have read the guide and summarise its intent in three bullets.**
+```
+When we work on the codebase together your MUST follow the developer guide at:
+  https://github.com/dwmkerr/developer-guide and
+and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
+**Confirm that you have read the guide and summarise its intent in three bullets.**
+```
 
 ![Screenshot of an introduction to how the developer guide works for Visual Studio Code](./.github/images/vscode.png)
 
