@@ -24,20 +24,29 @@ When we work on the codebase together your MUST follow the developer guide at:
 and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
 ```
 
-It is then useful to ask for confirmation that the guide has been read and its intent understood.
+I typically ask for confirmation that the guide has been read and its intent understood:
+
+```
+Confirm that you have read the guide and summarise its intent in three bullets.
+```
 
 Below are some examples for specific tools and use cases.
 
 ### Visual Studio Code
 
-Use [Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Point your agent at the developer guide repository, or your locally checked out version. I typically ask for confirmation that the guide has been read and its intent understood:
+Use [Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode).
 
-```
+Create a local [GitHub Copilot Instructions file](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) with the prompt:
+
+```bash
+cat << EOF > .github/copilot-instructions.md
 When we work on the codebase together your MUST follow the developer guide at:
-  https://github.com/dwmkerr/developer-guide and
+  https://github.com/dwmkerr/developer-guide
 and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
-**Confirm that you have read the guide and summarise its intent in three bullets.**
+EOF
 ```
+
+You can also drop the prompt directly in the chat:
 
 ![Screenshot of an introduction to how the developer guide works for Visual Studio Code](./.github/images/vscode.png)
 
