@@ -21,6 +21,6 @@
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "developer-guide",
+  "projectName": "ai-developer-guide",
   "projectOwner": "dwmkerr"
 }
