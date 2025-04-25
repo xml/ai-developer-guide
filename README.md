@@ -1,7 +1,6 @@
 # ai-developer-guide
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/github/all-contributors/dwmkerr/ai-developer-guide?color=ee8449&style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A set of standards, patterns and principles for development projects. Use with AI and your development team, evolve for your needs.
