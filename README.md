@@ -24,7 +24,7 @@ The quickest way to let colleagues or AI agents know to use the developer guide 
 
 ```
 When we work on the codebase together your MUST follow the developer guide at:
-  https://github.com/dwmkerr/developer-guide
+  https://github.com/dwmkerr/ai-developer-guide
 and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
 ```
 
@@ -45,7 +45,7 @@ Create a local [GitHub Copilot Instructions file](https://docs.github.com/en/cop
 ```bash
 cat << EOF > .github/copilot-instructions.md
 When we work on the codebase together your MUST follow the developer guide at:
-  https://github.com/dwmkerr/developer-guide
+  https://github.com/dwmkerr/ai-developer-guide
 and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
 EOF
 ```
@@ -61,9 +61,9 @@ To download your own copy of the guide to work on and edit run the script below,
 ```bash
 mkdir -p developer-guide
 cd developer-guide
-curl -O https://raw.githubusercontent.com/dwmkerr/developer-guide/main/docs/CONTRIBUTING.md
-curl -O https://raw.githubusercontent.com/dwmkerr/developer-guide/main/docs/developer-guide.md
-curl -O https://raw.githubusercontent.com/dwmkerr/developer-guide/main/docs/pair-programming.md
+curl -O https://raw.githubusercontent.com/dwmkerr/ai-developer-guide/main/docs/CONTRIBUTING.md
+curl -O https://raw.githubusercontent.com/dwmkerr/ai-developer-guide/main/docs/developer-guide.md
+curl -O https://raw.githubusercontent.com/dwmkerr/ai-developer-guide/main/docs/pair-programming.md
 ```
 
 Let your team know where to find the docs. If you are working with AI, try the following prompt:
@@ -102,7 +102,7 @@ Please fork, contribute or suggest changes! This is very much work in progress a
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gerrit-schoettler-qb"><img src="https://avatars.githubusercontent.com/u/91087829?v=4?s=100" width="100px;" alt="Gerrit Schoettler"/><br /><sub><b>Gerrit Schoettler</b></sub></a><br /><a href="https://github.com/dwmkerr/developer-guide/commits?author=gerrit-schoettler-qb" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gerrit-schoettler-qb"><img src="https://avatars.githubusercontent.com/u/91087829?v=4?s=100" width="100px;" alt="Gerrit Schoettler"/><br /><sub><b>Gerrit Schoettler</b></sub></a><br /><a href="https://github.com/dwmkerr/ai-developer-guide/commits?author=gerrit-schoettler-qb" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
