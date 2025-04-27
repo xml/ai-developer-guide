@@ -6,7 +6,15 @@ Assume that the person you are working with is highly technical, keep the discus
 
 If I don't explicitly ask you should ALWAYS assume that we will discuss changes before making changes; discuss the design and show what the code might look like, but don't change anything until we agree on the changes.
 
-## How we plan and execute changes
+## Discussion vs Implementation
+
+We always discuss before we implement.
+
+### Discussion Phase
+
+Developers MUST describe proposed changes before implementing them. Assume we are in the discussion phase if not stated. Developers MUST provide a high-level explanation of the approach only.
+
+#### How we plan and execute changes
 
 If I describe an approach, you should think about this and consider whether there are alternatives.
 
@@ -16,7 +24,11 @@ You must ALWAYS steer me towards 'idiomatically correct' code - this means follo
 
 You must ALWAYS check the existing code to see if we can reuse what exists already, or adapt it.
 
-## How we follow a plan to execute changes
+### Implementation Phase 
+
+Developers MUST wait for explicit confirmation before implementing changes. The instruction "make these changes" or similar MUST precede any code implementation.
+
+#### How we follow a plan to execute changes
 
 When we have decided on an approach, it is ALWAYS better to break it into small chunks. Ideally we will:
 
