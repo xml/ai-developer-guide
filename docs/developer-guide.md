@@ -27,7 +27,7 @@ We MUST follow this guide. If there are circumstances when this is not possible,
 
 Before making changes we SHOULD make at least a simple plan.
 
-We SHOULD implement APIs and interfaces before we create an implementation.
+We SHOULD discuss APIs and interfaces before we create an implementation.
 
 We MUST look at existing code and attempt to follow conventions. For example, if we are adding a new React.js hook, we MUST look in our project to see if there are existing hooks. If so, we should follow existing patterns and conventions.
 

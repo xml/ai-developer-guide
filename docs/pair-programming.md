@@ -43,6 +43,8 @@ It is better to stop and ask questions if a change looks like it might get too b
 
 We should NEVER make changes that do not relate to our work. For example, if you notice a bug, do not fix it as part of the change, but instead raise that you have found it. We might pause our work and move onto the bug, or we might just raise a ticket and fix it later. But we should always keep our changes focused on the current work.
 
+We should NEVER try to anticipate changes that might be useful to add, for example if we add a backend feature we MUST not assume the frontend should be updated, instead we MUST suggest that we update the frontend and be ready to discuss changes.
+
 Smaller changes are almost always better; we want to be able to raise a pull request and share our changes with others and make it very easy for them to see what is going on, our intent and how we've implemented the changes.
 
 Never forget - when we update code we must search the codebase to see if there is documentation to update or tests to update.
