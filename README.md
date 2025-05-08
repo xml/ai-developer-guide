@@ -22,15 +22,10 @@ A set of standards, patterns and principles for development projects. Use with A
 
 The quickest way to let colleagues or AI agents know to use the developer guide is to use this prompt:
 
-```
+```md
 When we work on the codebase together your MUST follow the developer guide at:
   https://github.com/dwmkerr/ai-developer-guide
 and you MUST follow the instructions in `docs/CONTRIBUTING.md`.
-```
-
-I typically ask for confirmation that the guide has been read and its intent understood:
-
-```
 Confirm that you have read the guide and summarise its intent in three bullets.
 ```
 
