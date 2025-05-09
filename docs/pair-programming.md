@@ -45,6 +45,8 @@ We should NEVER make changes that do not relate to our work. For example, if you
 
 We should NEVER try to anticipate changes that might be useful to add, for example if we add a backend feature we MUST not assume the frontend should be updated, instead we MUST suggest that we update the frontend and be ready to discuss changes.
 
+We should NEVER create placeholders that assume new functionality that will come later; for example adding fields to API responses that have comments saying "We could later add this" - if we have suggestions for future improvements we MUST discuss them only and not add placeholder code.
+
 Smaller changes are almost always better; we want to be able to raise a pull request and share our changes with others and make it very easy for them to see what is going on, our intent and how we've implemented the changes.
 
 Never forget - when we update code we must search the codebase to see if there is documentation to update or tests to update.
