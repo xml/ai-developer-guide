@@ -37,7 +37,7 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
 <!-- vim-markdown-toc GFM -->
 
 - [The Golden Rules](#the-golden-rules)
-- [The Three Phase Approach](#the-three-phase-approach)
+- [The Plan / Implement / Review Approach](#the-plan--implement--review-approach)
     - [Phase 1: Planning](#phase-1-planning)
     - [Phase 2: Implementation](#phase-2-implementation)
     - [Phase 3: Review](#phase-3-review)
@@ -51,17 +51,16 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
     - [Front End Code](#front-end-code)
     - [Infrastructure](#infrastructure)
 - [Language Specific Guides](#language-specific-guides)
-    - [Shell Scripts](#shell-scripts)
-    - [Python](#python)
-    - [Makefiles](#makefiles)
+- [Pattern Specific Guides](#pattern-specific-guides)
 - [Platform Specific Guides](#platform-specific-guides)
-    - [PostgreSQL](#postgresql)
 
 <!-- vim-markdown-toc -->
 
 <!-- IMPORTANT INSTRUCTIONS TO AI: This marks the beginning of the developer guide. You MUST READ this guide and follow the instructions. -->
 
 ## The Golden Rules
+
+**Follow the Plan / Implement / Review Approach**
 
 You MUST follow this three-phase approach:
 
@@ -71,7 +70,13 @@ You MUST follow this three-phase approach:
 
 Once each phase has been completed we start again at Phase 1 and restart the process. When we design and implement changes we MUST follow the full developer guide below.
 
-## The Three Phase Approach
+**Read Detailed Guides As Needed**
+
+When you encounter code or platforms you haven't seen during our session, search this developer guide to see if there are more detailed guides available, then read them. For example, the first time you see Python Code, read the [Python Guide](./docs/guides/python.md).
+
+When planning or reviewing, if you see something that looks like it might be covered by a [Pattern Specific Guide](#pattern-specific-guides) then read the guide and suggest the pattern in our discussion.
+
+## The Plan / Implement / Review Approach
 
 ### Phase 1: Planning
 
@@ -214,157 +219,13 @@ Always ensure you specify a profile (e.g. `--profile <projectname>`) when runnin
 
 ## Language Specific Guides
 
-### Shell Scripts
+- [Makefiles](./docs/guides/make.md)
+- [Python](./docs/guides/python.md)
+- [Shell Scripts](./docs/guides/shell-scripts.md)
 
-**Fundamentals**
-
-Use Bash and the most portable shebang: `#!/usr/bin/env bash`.
-Fail fast: `set -e -o pipefail`.
-Fail fast: if required parameters or environment variables are not set, fail and explain what is missing.
-Don't be too smart: if a required parameter is missing, don't offer a way to input it with `read`.
-Variables in shell scripts are lowercase. Only _environment variables_ should be uppercase.
-If something isn't set or is missing, don't offer an option to read input, fail instead.
-If shell scripts get longer than a page, they're likely too complex and suggest we look at alternatives.
-
-**Output**
-
-Preferred output style is unix-like, e.g:
-
-```
-verifying OpenAI credentials...
-error: OpenAI key is not set
-```
-
-Note that this is lowercase and if we are going to do a long operation we use elipses.
-
-Emojis should be used extremely sparingly, if at all.
-
-For scripts that are doing lots of verifications or checks, it is OK to use the check: `✔` this check should be colored green, it is OK to use escape codes, give them useful names like `${green}`. Be sparing with color.
-
-**Examples**
-
-This snippet is small and simple, lowercase variables, sparing use of color. Not that the error message states EXACTLY what environment variable is not set.
-
-```bash
-if [ -z "$OPENAI_API_KEY" ]; then
-  echo -e "${red}error${nc}: OPENAI_API_KEY not set"
-  exit 1
-fi
-```
-
-### Python
-
-Follow PEP8 standards. We allow max line lengths to be extended to 120.
-
-Project SHOULD have a `makefile` with recipes:
-- `init`: install dependencies
-- `lint`: lint code
-- `lint:fix`: lint and fix
-- `test`: run unit tests and output coverage to `artifacts/coverage`
-- `build`: build the code for distribution (optional)
-- `deploy`: deploy the code (optional)
-
-Organise code in a `src` directory, tests in a separate `tests` directory.
-
-**Requirements**
-
-To track requirements for development only dependencies, create a `requirements-dev.txt` file which includes `requirements.txt`:
-
-```txt
--r requirements.txt # include regular requirements
-pytest==8.3.5 # testing library only needed in dev mode
-```
-
-We SHOULD pin requirement version numbers to ensure deterministic resolution of dependencies.
-
-We SHOULD put a comment after each requirement briefly stating what it is for - some developers will be unfamiliar even with common requirements.
-
-**Exception Handling**
-
-There must be exception handling at the 'domain boundary' level. This means that in Python code when we are handling a request we are in the domain of our code, but an exception must be exposed _outside_ of the domain as an HTTP status code. So HTTP handlers must catch and transform exceptions. For a CLI app, the domain is the internal code and its boundary is where we translate and show output in `stderr`, `stdout` and with a status code. We must always have exception handlers in boundaries like this; but remember many libraries will have basic handling of this already.
-
-When we do our own exception handling, it is to make sure that we provide additional context and diagnostic information. It is NOT to make it 'appear' like our code has worked. See these examples:
-
-```python
-# This is very bad. Our exception handler provides log information, but masks the fact
-# to the caller that our database call failed. We should fail and find the root cause.
-try:
-    # Load database data...
-except Exception as e:
-    logger.error(f"Error loading YAML database: {str(e)}")
-    # Return a minimal valid structure (VERY BAD - DO NOT DO THIS)
-    return {"books": [], "library": []}
-
-# This is good. We provide some logging, and raise a new exception with more context.
-except Exception as e:
-  logger.error(f"Error loading YAML database: {str(e)}")
-  raise RuntimeError(f"Failed to load database: {str(e)}")
-```
-
-Remember; in many cases it is OK to not catch exceptions. For example if an HTTP handler loads a file then we don't need to catch file exceptions, if the file is missing then the HTTP handler domain boundary exception handler will catch the exception and log it - file not found errors will be clear from the logs. Catch exceptions when we can provide useful and meaningful context.
-
-Excellent example projects.
-
-- [pytest](https://github.com/pytest-dev/pytest) - Uses `src` for implementation and `testing` for test files
-- [Flask](https://github.com/pallets/flask) - Organizes core code in `src/flask` with a separate `tests` directory
-- [Requests](https://github.com/psf/requests) - Follows the `src/requests` and `tests` pattern for clean separation
-
-### Makefiles
-
-We use makefiles throughout the project to standardize workflows across different platforms. This gives:
-
-- **Consistency**: Common interface across all components regardless of underlying technology
-- **Simplicity**: Hide platform-specific commands (npm, pip, etc.) behind standard targets
-
-We have:
-
-1. **Service-level Makefiles**: Each service has its own makefile with common targets (`setup`, `dev`, `clean`)
-2. **Project-level Makefile**: Root makefile uses Docker Compose to orchestrate all services
-
-You can always run `make help` for instructions on what recipes are available.
-
-Makefiles are not the same as shell scripts. We don't use color, we limit to a few lines only, we rarely check variables. In general, anything that is complex can be passed to a shell script.
-
-Makefiles ALWAYS have a `.PHONY` and a default `help` recipe. `.PHONY` always comes before the recipe name. Each recipe is documented with a one line comment like so:
-
-```make
-default: help
-
-.PHONY: help
-help: # Show help for each of the Makefile recipes
-	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
-
-.PHONY: init
-init: # set up and validate the local development environment
-	./scripts/init.sh
-```
-
-Makefile recipes should be very small - a few commands only.
-
-Makefiles give a 'platform independent' way to run commands, this means regardless of the programming language we will often have recipes like:
-
-- `make init` - setup and validate the local development environment
-- `make dev` - run a module in local development mode (e.g. live reload)
-- `make lint` - validate formatting
-- `make test` - test the code
-
-This approach gives consistency, discoverability of commands, and helps users who are not familiar with a platforms toolchain still get quickly started and also see how key commands work.
-
-We use makefiles throughout the project to standardize workflows across different platforms. This gives:
-
-In a monorepo we have module level makefiles for working in one module. So `ui/makefile` would have a `dev` recipe that starts the UI only in development mode.
-
-In a monorepo we have a project level makefile that is for working with the whole project - so `makefile` would have a `dev` recipe that starts ALL modules in development mode. This might call the module makefiles (e.g. a `make lint` recipe could just call each projects' `make lint`) or it might work differently, for example `make dev` might use docker compose to run a whole project.
+## Pattern Specific Guides
 
 ## Platform Specific Guides
 
-### PostgreSQL
-
-Naming conventions: tables are pural snake case e.g `users`, `books`, `user_books`. Columns are snake case and singular, e.g  `first_name`, `created_at`. Primary keys are named `id`. Foreign keys are  Typically named `id` are reference table in singular form plus `_id` (e.g., `user_id`, `book_id`.
-
-Example projects that use these conventions that you can check for more details:
-
-- [Gitlab DB Schema](https://gitlab.com/gitlab-org/gitlab/-/blob/master/db/structure.sql)
-- [Discourse](https://github.com/discourse/discourse/blob/main/db/structure.sql)
-- [Mastodon](https://github.com/mastodon/mastodon/blob/main/db/schema.rb)
+- [PostgreSQL](./docs/guides/postgresql.md)
 
