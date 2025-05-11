@@ -2,7 +2,6 @@
 <p align="center">
   <h2 align="center"><code>🧠 The AI Developer Guide</code></h2>
   <h3 align="center">Empower your AI with standards, patterns and principles for sane, effective and maintainable development.</h3>
-  <h5 align="center">(...works with humans too)</h5>
   <p align="center">
     <a href="#quickstart">Quickstart</a> |
     <a href="#the-golden-rules">The Golden Rules</a> |
@@ -63,7 +62,7 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
 You MUST follow this three-phase approach:
 
 - **Phase 1: Planning** - We work together to design a plan and agree on a target solution. You MUST then wait for explicit approval before making any code changes.
-- **Phase 2: Implementation** - Implement only the agreed changes. You MUST stop when complete.
+- **Phase 2: Implementation** - Implement only the agreed changes. You MUST stop as soon as the agreed changes have been made.
 - **Phase 3: Review** - We will review and verify the changes, then discuss any issues or ideas for improvements found during implementation. You may suggest improvements and suggest next steps. We will then discuss and move to the next planning phase.
 
 Once each phase has been completed we start again at Phase 1 and restart the process. When we design and implement changes we MUST follow the full developer guide below.
@@ -116,6 +115,8 @@ Smaller changes are almost always better; we want to be able to raise a pull req
 
 Never forget - when we update code we must search the codebase to see if there is documentation to update or tests to update.
 
+After completing an implementation, ALWAYS stop and wait for explicit direction. Never suggest or implement follow-up changes without approval. Each change, no matter how small or seemingly obvious, requires its own complete cycle through the phases."
+
 ### Phase 3: Review
 
 Review the implemented changes. Discuss any issues, unexpected side effects, or improvement ideas. Share quick suggestions for what we should do next.
@@ -123,6 +124,12 @@ Review the implemented changes. Discuss any issues, unexpected side effects, or 
 Do not start new work here — raise ideas to be discussed in the next planning phase.
 
 You MUST check to see whether we can now remove or simplify any existing code.
+
+The Review phase is critical and cannot be skipped. After each implementation, wait for the developer to:
+
+- Confirm the change meets requirements
+- Explicitly request further analysis or implementation
+- Direct the next steps
 
 ## The Developer Guide
 
@@ -171,15 +178,26 @@ Websites generated from Markdown documentation should be used for complex projec
 
 ### Comments
 
-Comments SHOULD be short and should describe the _intent_ of code - i.e. _what_ we are trying to do. _How_ it is done is the code itself. However, if code is very complex, it is OK to help the reader by explaining what is going on.
+### Comments
 
-Comments SHOULD be written as sentences, capitalised and with full stops.
+**Guidelines:**
 
-Comments MUST not describe changes we have made, such as 'change from an HTTP call to gRPC' - we describe the intent of code or its intent and meaning if it is complex.
+- Focus on intent and purpose - explain *what* the code accomplishes and *why*
+- Write as complete sentences with proper capitalization and punctuation
+- Keep comments concise but informative
+- Avoid documenting the development process ("Changed X to fix Y")
+- Use comments to explain complex logic or business rules when necessary
+- For complex code, if we were to remove all of the code and leave just the comments, we should still be able to follow the flow
 
-If you were to take a file and delete everything but the comments, you should still be able to follow the basic flow of what is going on. This is important; some readers will not know the programming language or will be more junior, they should be able to follow step by step, but not be overwhelmed with details or have lots of duplication of code and comment.
+**Good and Bad Examples:**
 
-Small comments can follow a line for a little bit of extra context, but use sparingly.
+```python
+# ❌ BAD: Documents change history instead of intent
+# Removed timestamp field because it caused performance issues.
+
+# ✅ GOOD: Explains the current intent/purpose
+# Processing happens asynchronously, so we don't track exact timestamps.
+```
 
 ### Modules
 

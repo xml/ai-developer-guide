@@ -10,6 +10,7 @@ This page describes how to set up specific tools and editors, as well as how to 
     - [Claude Code](#claude-code)
 - [Creating Custom or Project Specific Guides](#creating-custom-or-project-specific-guides)
 - [Installing Locally](#installing-locally)
+- [Improving the Guide During Development](#improving-the-guide-during-development)
 - [Forking](#forking)
 
 <!-- vim-markdown-toc -->
@@ -98,6 +99,26 @@ Read the developer guide at:
   ./ai-developer-guide.md
 You MUST follow the rules in this guide. Summarise its intent in three lines.
 ```
+
+## Improving the Guide During Development
+
+If you are building your own guide you can ask your AI to be very explicit when it has proposed or read something from the guide, and suggest improvements while working:
+
+```
+Read the developer guide at:
+  https://github.com/dwmkerr/ai-developer-guide
+You MUST follow the rules in this guide.
+We are going to improve the guide together while we do our regular work:
+- When you use the guide, be explicit in our discussion, especially if you need to read a more detailed guide
+- If anything in the guide is unclear, raise this and we will discuss.
+```
+
+You may also find it useful to periodically check:
+
+```
+Are you still using the AI Developer Guide? How have you used it recently? Would any changes to it have made it more useful or the work we're doing any faster? Would any changes have reduced confusion or misalignment during our conversation?
+```
+
 
 ## Forking
 
