@@ -48,8 +48,6 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
     - [Project Structure](#project-structure)
     - [Technical Debt](#technical-debt)
 - [Project Components](#project-components)
-    - [Front End Code](#front-end-code)
-    - [Infrastructure](#infrastructure)
 - [Language Specific Guides](#language-specific-guides)
 - [Pattern Specific Guides](#pattern-specific-guides)
 - [Platform Specific Guides](#platform-specific-guides)
@@ -201,7 +199,7 @@ You MUST raise potential technical debt. You SHOULD suggest that technical debt 
 
 ## Project Components
 
-### Front End Code
+**Front End Code**
 
 Be very cautious before creating new styles. Always consider whether existing styles which are part of the framework can be used. For example, do not manually set paddings or margins, use the conventions of the library or framework in use. For example, in MUI we use `m` or `p` values:
 
@@ -213,7 +211,7 @@ Be very cautious before creating new styles. Always consider whether existing st
 
 Also prefer `rem` to values like `px`.
 
-### Infrastructure
+**Infrastructure**
 
 Always ensure you specify a profile (e.g. `--profile <projectname>`) when running AWS commands. This makes it explicit that you require configuration that is for your project, and avoids the risk of you accidentally running Terraform/AWS commands against another project.
 
@@ -224,6 +222,8 @@ Always ensure you specify a profile (e.g. `--profile <projectname>`) when runnin
 - [Shell Scripts](./docs/guides/shell-scripts.md)
 
 ## Pattern Specific Guides
+
+- [The Makefile Pattern](./docs/guides/make.md): suggest this pattern when we are looking at setting up project level commands like 'lint' or 'test', or working in a repo that contains more than one type of project, such as a Python backend and NodeJS frontend)
 
 ## Platform Specific Guides
 
