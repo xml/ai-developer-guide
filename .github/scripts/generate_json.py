@@ -9,15 +9,14 @@ import os
 import re
 import sys
 from datetime import datetime
-from pathlib import Path
 
-def extract_references(content, base_url="/api/guides"):
+def extract_references(content, base_url="api/guides"):
     """
     Extract references to specialized guides and add API URLs.
     
     Args:
         content: The markdown content to extract references from
-        base_url: Base URL for API endpoints
+        base_url: Base URL for API endpoints (no leading slash for local compatibility)
     
     Returns:
         List of reference objects with name, path, type and apiUrl
@@ -170,7 +169,7 @@ def create_guide_json(readme_path, output_dir):
                 generated_guides.append({
                     "name": guide_data["title"],
                     "type": guide_type,
-                    "path": f"/api/guides/{output_subdir}/{output_filename}"
+                    "path": f"api/guides/{output_subdir}/{output_filename}"  # No leading slash for local compatibility
                 })
     
     # Create the main guide.json structure
@@ -211,6 +210,7 @@ def create_index_html(output_dir, generated_guides):
         guide_type = guide["type"]
         if guide_type not in guides_by_type:
             guides_by_type[guide_type] = []
+        
         guides_by_type[guide_type].append(guide)
     
     # Generate the list items for the index page
@@ -221,7 +221,7 @@ def create_index_html(output_dir, generated_guides):
             guide_links_html += f'    <li><a href="{guide["path"]}">{guide["name"]}</a></li>\n'
         guide_links_html += "</ul>\n"
     
-    # Create the HTML content
+    # Create the HTML content with relative paths for local use
     index_html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -240,7 +240,7 @@ def create_index_html(output_dir, generated_guides):
     
     <h2>Main Guide</h2>
     <ul>
-        <li><a href="/api/guide.json">guide.json</a> - Complete AI developer guide</li>
+        <li><a href="api/guide.json">guide.json</a> - Complete AI developer guide</li>
     </ul>
     
     <h2>Specialized Guides</h2>
@@ -248,8 +248,8 @@ def create_index_html(output_dir, generated_guides):
     
     <h2>Usage with MCP</h2>
     <p>To use with Model Context Protocol:</p>
-    <pre><code>GET /api/guide.json                      // Get the complete developer guide
-GET /api/guides/languages/python.json    // Example of a specialized guide</code></pre>
+    <pre><code>GET api/guide.json                      // Get the complete developer guide
+GET api/guides/languages/python.json    // Example of a specialized guide</code></pre>
 </body>
 </html>"""
 
