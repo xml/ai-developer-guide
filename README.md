@@ -43,6 +43,7 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
 - [The Developer Guide](#the-developer-guide)
     - [Documentation](#documentation)
     - [Comments](#comments)
+    - [Comments](#comments-1)
     - [Modules](#modules)
     - [Project Structure](#project-structure)
     - [Technical Debt](#technical-debt)
@@ -242,6 +243,7 @@ Always ensure you specify a profile (e.g. `--profile <projectname>`) when runnin
 ## Pattern Specific Guides
 
 - [The Makefile Pattern](./docs/guides/make.md): suggest this pattern when we are looking at setting up project level commands like 'lint' or 'test', or working in a repo that contains more than one type of project, such as a Python backend and NodeJS frontend)
+- [CICD](./docs/guides/cicd.md): suggest patterns from this guide when working on deployments, releases, GitHub workflows, etc
 
 ## Platform Specific Guides
 

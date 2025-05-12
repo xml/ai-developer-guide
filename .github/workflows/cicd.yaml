@@ -11,10 +11,17 @@ permissions:
   pull-requests: write
   packages: write
   issues: write
+  pages: write
+  id-token: write
 
 env:
   PYTHON_VERSION: "3.10"
   NODE_LTS_VERSION: "22.x"
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   markdown-link-check:
@@ -28,6 +35,25 @@ jobs:
           use-verbose-mode: 'yes'
           folder-path: '.'
           config-file: '.github/markdown-link-check-config.json'
+
+  build-site:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Build Site
+        run: |
+          make site
+          
+      - name: Upload Site Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
           
   release:
     runs-on: ubuntu-24.04
@@ -40,6 +66,18 @@ jobs:
         with:
           manifest-file: .github/release-please-manifest.json
           config-file: .github/release-please-config.json
+
+  deploy-site:
+    needs: release
+    if: ${{ needs.release.outputs.released }}
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   attach-assets:
     needs: release
