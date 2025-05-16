@@ -250,12 +250,16 @@ def generate_mcp_manifest(project_dir, output_dir, generated_guides):
         # Write the final manifest
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=2)
-            print(f"✓ Created manifest.json")
+            print("✓ Created manifest.json")
+            
+        print("\n📄 Manifest file created at: {}".format(output_path))
+        print("   This file is used by MCP servers to define available endpoints.\n")
+        
     except Exception as e:
         print(f"Error generating MCP manifest: {e}")
 
 def create_index_html(output_dir, generated_guides):
-    """Create the index.html file with links to all guides."""
+    """Create the index.html file with links to all guides and manifest file."""
     
     # Group guides by type for the index page
     guides_by_type = {}
@@ -266,13 +270,45 @@ def create_index_html(output_dir, generated_guides):
         
         guides_by_type[guide_type].append(guide)
     
-    # Generate the list items for the index page
-    guide_links_html = ""
-    for guide_type, guides in guides_by_type.items():
-        guide_links_html += f"<h3>{guide_type.capitalize()} Guides</h3>\n<ul>\n"
-        for guide in guides:
-            guide_links_html += f'    <li><a href="{guide["path"]}">{guide["name"]}</a></li>\n'
-        guide_links_html += "</ul>\n"
+    # Generate table rows for the resources
+    resource_table_rows = ""
+    
+    # First add the manifest file
+    resource_table_rows += """
+    <tr>
+        <td>Manifest</td>
+        <td><a href="manifest.json">manifest.json</a></td>
+        <td>MCP Server Manifest</td>
+    </tr>
+    """
+    
+    # Then add the main guide
+    resource_table_rows += """
+    <tr>
+        <td>Main Guide</td>
+        <td><a href="api/guide.json">guide.json</a></td>
+        <td>Complete AI Developer Guide</td>
+    </tr>
+    """
+    
+    # Define the order of guide types
+    guide_type_order = ["language", "pattern", "platform", "other"]
+    
+    # Add all specialized guides to the table in the specified order
+    for guide_type in guide_type_order:
+        if guide_type in guides_by_type:
+            guides = guides_by_type[guide_type]
+            # Sort guides by name for consistent ordering
+            guides.sort(key=lambda g: g["name"])
+            for guide in guides:
+                filename = guide["path"].split("/")[-1]
+                resource_table_rows += f"""
+    <tr>
+        <td>{guide_type.capitalize()}</td>
+        <td><a href="{guide["path"]}">{filename}</a></td>
+        <td>{guide["name"]}</td>
+    </tr>
+    """
     
     # Create the HTML content with relative paths for local use
     index_html = f"""<!DOCTYPE html>
@@ -285,24 +321,40 @@ def create_index_html(output_dir, generated_guides):
         a {{ color: #0366d6; text-decoration: none; }}
         a:hover {{ text-decoration: underline; }}
         code {{ background-color: #f6f8fa; padding: 3px 5px; border-radius: 3px; }}
+        table {{ width: 100%; border-collapse: collapse; margin: 20px 0; }}
+        th {{ background-color: #f6f8fa; text-align: left; padding: 10px; }}
+        td {{ border-bottom: 1px solid #eee; padding: 10px; }}
+        .card {{ background-color: #f6f8fa; padding: 15px; border-radius: 5px; margin: 20px 0; }}
     </style>
 </head>
 <body>
     <h1>AI Developer Guide API</h1>
     <p>This is the JSON API for the AI Developer Guide.</p>
     
-    <h2>Main Guide</h2>
-    <ul>
-        <li><a href="api/guide.json">guide.json</a> - Complete AI developer guide</li>
-    </ul>
+    <div class="card">
+        <h2>Manifest File</h2>
+        <p>The <a href="manifest.json">manifest.json</a> file is used by MCP (Model Context Protocol) servers to define available endpoints.</p>
+    </div>
     
-    <h2>Specialized Guides</h2>
-    {guide_links_html}
+    <h2>Available Resources</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Resource</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {resource_table_rows}
+        </tbody>
+    </table>
     
     <h2>Usage with MCP</h2>
     <p>To use with Model Context Protocol:</p>
     <pre><code>GET api/guide.json                      // Get the complete developer guide
-GET api/guides/languages/python.json    // Example of a specialized guide</code></pre>
+GET api/guides/languages/python.json    // Example of a specialized guide
+GET manifest.json                       // Get the MCP server manifest</code></pre>
 </body>
 </html>"""
 

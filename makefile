@@ -19,12 +19,6 @@ site-build: # build the the MCP server site
 
 .PHONY: site-run
 site-run: # run a simple HTTP server for the site
-	python -m http.server --directory ./site 8080
-
-.PHONY: mcp-setup
-mcp-setup: # install dependencies for the MCP server
-	cd mcp && npm install
-
-.PHONY: mcp-run
-mcp-run: # run the MCP server
-	cd mcp && npm start
+	@echo "Starting HTTP server at http://localhost:9090"
+	@echo "Press Ctrl+C to stop the server"
+	python -m http.server --directory ./site 9090
