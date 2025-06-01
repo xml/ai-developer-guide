@@ -118,6 +118,8 @@ Never forget - when we update code we must search the codebase to see if there i
 
 After completing an implementation, ALWAYS stop and wait for explicit direction. Never suggest or implement follow-up changes without approval. Each change, no matter how small or seemingly obvious, requires its own complete cycle through the phases."
 
+NEVER make assumptions on how to make change better than we have discussed, for example if we planned to setup nginx as a reverse proxy, don't also set config you believe to be better, such as gzip, instead in the 'review' phase propose that gzip config should be added, and why. We will then discuss in the next 'planning' phase.
+
 ### Phase 3: Review
 
 Review the implemented changes. Discuss any issues, unexpected side effects, or improvement ideas. Share quick suggestions for what we should do next.
