@@ -15,7 +15,7 @@
   </p>
 </p>
 
-Point your AI system at this guide and you will get significantly improved results and collaboration when coding:
+Point your LLM/agents/editor at this guide and you will get significantly improved results and collaboration when coding:
 
 - Large changes are designed and discussed before being implemented
 - Sensible design patterns are followed, technical debt is managed
