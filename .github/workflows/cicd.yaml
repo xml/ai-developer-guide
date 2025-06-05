@@ -113,7 +113,15 @@ jobs:
           name: mcp-build-artifacts
           path: ./artifacts
 
+      - name: Skip Coverage Upload (Running Locally)
+        if: ${{ env.ACT }}
+        run: |
+          echo "ℹ️  Skipping coverage upload when running locally with 'act'"
+          echo "   Coverage upload requires GitHub tokens that are not available locally"
+          echo "   Coverage reports are available in ./artifacts/coverage/"
+
       - name: Upload Coverage
+        if: ${{ !env.ACT }}
         uses: codecov/codecov-action@v5
         with:
           directory: ./artifacts/coverage
@@ -127,7 +135,16 @@ jobs:
       released: ${{ steps.release-please.outputs.release_created }}
       tag: ${{ steps.release-please.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - name: Skip Release (Running Locally)
+        if: ${{ env.ACT }}
+        run: |
+          echo "ℹ️  Skipping release when running locally with 'act'"
+          echo "   Release creation requires GitHub tokens that are not available locally"
+          echo "   In production, this job uses Release Please to manage versioning and releases"
+
+      - name: Create Release
+        if: ${{ !env.ACT }}
+        uses: googleapis/release-please-action@v4
         id: release-please
         with:
           manifest-file: .github/release-please-manifest.json
@@ -142,6 +159,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        if: ${{ !env.ACT }}
         id: deployment
         uses: actions/deploy-pages@v4
 
@@ -155,21 +173,26 @@ jobs:
         working-directory: ./mcp/ai-developer-guide-mcp
     steps:
       - name: Checkout
+        if: ${{ !env.ACT }}
         uses: actions/checkout@v4
 
       - name: Setup Node for Release
+        if: ${{ !env.ACT }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_LTS_VERSION }}
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
+        if: ${{ !env.ACT }}
         run: make init
 
       - name: Build Distributable
+        if: ${{ !env.ACT }}
         run: make build
 
       - name: Publish to NPM
+        if: ${{ !env.ACT }}
         run: |
           if [ "$NODE_AUTH_TOKEN" == "" ]; then
             echo "The 'NPM_TOKEN' secret must be set to deploy to NPM"
@@ -182,6 +205,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to GitHub Packages
+        if: ${{ !env.ACT }}
         run: |
           npm set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
           npm publish --registry https://npm.pkg.github.com

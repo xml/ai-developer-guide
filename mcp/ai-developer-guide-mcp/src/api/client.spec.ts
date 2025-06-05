@@ -1,7 +1,5 @@
+import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import { ApiClient } from './client.js';
-
-// Mock fetch globally
-global.fetch = jest.fn();
 
 describe('ApiClient', () => {
   let apiClient: ApiClient;

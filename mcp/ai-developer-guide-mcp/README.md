@@ -154,6 +154,14 @@ npm run dev -- test
 # Test with custom URL
 npm run dev -- test --base-url "http://localhost:9090"
 ```
+    "ai-developer-guide-local": {
+        "command": "node",
+        "args": [
+          "/Users/Dave_Kerr/repos/github/dwmkerr/ai-developer-guide/mcp/ai-developer-guide-mcp/dist/cli.js",
+          "start"
+        ],
+        "cwd": "/Users/Dave_Kerr/repos/github/dwmkerr/ai-developer-guide/mcp/ai-developer-guide-mcp"
+      },
 
 ## License
 

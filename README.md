@@ -4,12 +4,13 @@
   <h3 align="center">Empower your AI with standards, patterns and principles for sane, effective and maintainable development.</h3>
   <p align="center">
     <img src="https://img.shields.io/endpoint?url=https://dwmkerr.github.io/ai-developer-guide/version-badge.json" alt="Version" />
+    <a href="https://www.npmjs.com/package/@dwmkerr/ai-developer-guide-mcp"><img src="https://img.shields.io/npm/v/%40dwmkerr/ai-developer-guide-mcp" alt="ai-developer-guide-mcp"></a>
   </p>
   <p align="center">
     <a href="#quickstart">Quickstart</a> |
     <a href="#the-golden-rules">The Golden Rules</a> |
     <a href="#the-developer-guide">The Developer Guide</a> |
-    <a href="./docs/setup.md">Setup Instructions</a> |
+    <a href="./docs/setup.md">Setup & MCP Instructions</a> |
     <a href="./docs/about.md">About</a>
   </p>
 </p>
@@ -24,12 +25,21 @@ Point your AI system at this guide and you will get significantly improved resul
 
 ## Quickstart
 
-Pass the following instructions to your AI:
+Prompt your LLM, VS Code, Cursor, etc:
 
 ```md
 Read the developer guide at:
   https://github.com/dwmkerr/ai-developer-guide
 You MUST follow the rules in this guide. Summarise its intent in three lines.
+```
+
+Or use the [MCP Server](./docs/setup.md):
+
+```json
+"ai-developer-guide": {
+"command": "npx",
+"args": ["-y", "@dwmkerr/ai-developer-guide-mcp"]
+}
 ```
 
 The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors like VS Code, Cursor, and more.
