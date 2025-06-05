@@ -9,12 +9,10 @@
       "extra-files": [
         {
           "type": "json",
-          "path": "modules/node/package.json",
+          "path": "mcp/ai-developer-guide-mcp/package.json",
           "jsonpath": "$.version"
         }
       ]
     }
   }
 }
-
-

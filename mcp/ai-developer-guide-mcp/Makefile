@@ -24,7 +24,3 @@ test: # Run unit tests and output coverage to artifacts/coverage
 .PHONY: build
 build: # Build the code for distribution
 	npm run build
-
-.PHONY: cicd
-cicd: # Run the CI/CD workflow locally
-	act -P ubuntu-24.04=ghcr.io/catthehacker/ubuntu:act-latest 
