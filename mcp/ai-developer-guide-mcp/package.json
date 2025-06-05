@@ -8,7 +8,7 @@
     "ai-developer-guide-mcp": "./dist/cli.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "build:watch": "tsc -w",
     "start": "node --no-warnings ./dist/cli.js",
     "dev": "tsx ./src/cli.ts",
