@@ -36,9 +36,11 @@ You MUST follow the rules in this guide. Summarise its intent in three lines.
 Or use the [MCP Server](./docs/setup.md):
 
 ```json
-"ai-developer-guide": {
-"command": "npx",
-"args": ["-y", "@dwmkerr/ai-developer-guide-mcp"]
+{
+  "ai-developer-guide": {
+    "command": "npx",
+    "args": ["-y", "@dwmkerr/ai-developer-guide-mcp"]
+  }
 }
 ```
 
@@ -66,6 +68,8 @@ The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors
 - [Platform Specific Guides](#platform-specific-guides)
 
 <!-- vim-markdown-toc -->
+
+**🧠 Content from this point onwards is read by your LLM.**
 
 <!-- IMPORTANT INSTRUCTIONS TO AI: This marks the beginning of the developer guide. You MUST READ this guide and follow the instructions. -->
 
