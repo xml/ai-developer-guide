@@ -49,6 +49,13 @@ Or use the [MCP Server](./docs/setup.md):
 
 The [Setup Guide](./docs/setup.md) contains instructions on how to setup editors like VS Code, Cursor, and more.
 
+Now try some prompts such as:
+
+- "Look through the AI developer guide and tell me how to improve my project"
+- "What would be the essential patterns for open source for me to implement"
+- "How can I make my Python code more idiomatically correct?"
+- [...more examples](./docs/examples.md)
+
 **Table of Contents**
 
 <!-- vim-markdown-toc GFM -->
