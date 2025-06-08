@@ -15,6 +15,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "haruelrovix",
+      "name": "Havit Rovik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17120764?v=4",
+      "profile": "https://havit.web.id/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
