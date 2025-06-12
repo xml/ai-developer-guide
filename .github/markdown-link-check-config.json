@@ -5,6 +5,9 @@
     },
     {
       "pattern": "https://github.com/.+/compare/v.+\\.\\.\\.v.+"
+    },
+    {
+      "pattern": "^https://code\\.visualstudio\\.com/"
     }
   ],
   "replacementPatterns": [
@@ -13,8 +16,9 @@
       "replacement": "{{BASEURL}}/"
     }
   ],
-  "timeout": "20s",
+  "timeout": "30s",
   "retryOn429": true,
-  "retryCount": 3,
-  "fallbackRetryDelay": "30s"
+  "retryCount": 5,
+  "fallbackRetryDelay": "60s",
+  "aliveStatusCodes": [200, 206, 299]
 }
