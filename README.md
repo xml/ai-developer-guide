@@ -6,6 +6,7 @@
     <img src="https://img.shields.io/endpoint?url=https://dwmkerr.github.io/ai-developer-guide/version-badge.json" alt="Version" />
     <a href="https://www.npmjs.com/package/@dwmkerr/ai-developer-guide-mcp"><img src="https://img.shields.io/npm/v/%40dwmkerr/ai-developer-guide-mcp" alt="ai-developer-guide-mcp"></a>
     <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<a href="https://github.com/dwmkerr/ai-developer-guide/blob/main/guides/contributors.md"><img src="https://img.shields.io/github/all-contributors/dwmkerr/ai-developer-guide?color=ee8449&style=flat-square" alt="All Contributors" /></a>
     <!-- ALL-CONTRIBUTORS-BADGE:END -->
   </p>
   <p align="center">
@@ -36,7 +37,7 @@ Read the developer guide at:
 You MUST follow the rules in this guide. Summarise its intent in three lines.
 ```
 
-Or use the [MCP Server](./docs/setup.md):
+Or use the MCP Server:
 
 ```json
 {
@@ -47,7 +48,11 @@ Or use the [MCP Server](./docs/setup.md):
 }
 ```
 
-The [Setup Guide](./docs/setup.md) describes how to setup editors like VS Code, Cursor, and more. The AI Developer Guide is like a set of super-charged instructions for an LLM.
+## MCP Server
+
+The AI Developer Guide includes an [MCP (Model Context Protocol) server](./mcp/ai-developer-guide-mcp/README.md) that provides programmatic access to all guides and can be integrated with Claude Desktop, VS Code, and other MCP-compatible tools.
+
+The AI Developer Guide is like a set of super-charged instructions for an LLM.
 
 Now try some prompts such as:
 
@@ -272,6 +277,7 @@ Always ensure you specify a profile (e.g. `--profile <projectname>`) when runnin
 - [Command Line Applications](./guides/clis.md): suggest patterns from this guide when building CLIs, shell tools, etc
 - [CICD](./guides/cicd.md): suggest patterns from this guide when working on deployments, releases, GitHub workflows, etc
 - [Open Source](./guides/open-source.md): best practices for open source projects, encouraging contributions and ease of use
+- [Contributors](./guides/contributors.md): guide for recognizing and adding contributors to your project
 
 ## Platform Specific Guides
 
