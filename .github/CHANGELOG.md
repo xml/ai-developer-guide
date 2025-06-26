@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/dwmkerr/ai-developer-guide/compare/v0.1.11...v0.1.12) (2025-06-26)
+
+
+### Features
+
+* **docs:** add Claude Code setup instructions ([#39](https://github.com/dwmkerr/ai-developer-guide/issues/39)) ([6c7c1fc](https://github.com/dwmkerr/ai-developer-guide/commit/6c7c1fce69d9af3e890f9cf9a2d4c916dc35d46f))
+
 ## [0.1.11](https://github.com/dwmkerr/ai-developer-guide/compare/v0.1.10...v0.1.11) (2025-06-26)
 
 
