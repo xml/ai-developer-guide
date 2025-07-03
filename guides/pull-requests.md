@@ -9,5 +9,4 @@ Example of good PR description:
 - Add retry logic for API calls  
 - Update dependencies to resolve security vulnerabilities
 
-Example of poor PR description:
-- Implemented a comprehensive authentication timeout mechanism that handles various edge cases including network latency, server overload, and concurrent user sessions, utilizing exponential backoff algorithms and sophisticated error handling patterns to ensure robust user experience across different deployment environments...
+Avoid descriptions that are overly verbose with excessive bullets, headings, and emojis.
