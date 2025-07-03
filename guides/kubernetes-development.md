@@ -45,3 +45,7 @@ Additional printer columns show essential data in `kubectl get` output:
 NAME              STATUS   AGE
 spark-engine      Ready    5m
 ```
+
+## Status Update Conflicts and Concurrency
+
+When encountering optimistic concurrency conflicts ("object has been modified" errors), avoid retry logic as it masks genuine concurrency issues. Instead, identify why multiple controllers are updating the same resource simultaneously and fix the root cause. Ensure single ownership patterns where only one controller updates a resource's status, and audit your reconciliation logic for race conditions. Kubernetes conflicts typically indicate architectural problems, not transient issues requiring retries.
