@@ -2,7 +2,7 @@
 
 ## Custom Resource Definitions (CRDs)
 
-CRDs must be well documented with rich comments. Essential fields should be shown. Use kubebuilder validation tags:
+CRDs must be well documented with rich comments that become field descriptions in the generated OpenAPI schema and CRD YAML. Use kubebuilder validation tags:
 
 ```go
 // +kubebuilder:object:root=true
@@ -26,16 +26,6 @@ type ExecutionEngineSpec struct {
     // +kubebuilder:default=30
     // Timeout in seconds for data workload execution
     TimeoutSeconds int32 `json:"timeoutSeconds,omitempty"`
-}
-
-type ExecutionEngineStatus struct {
-    // +kubebuilder:validation:Optional
-    // Current phase of the ExecutionEngine (Pending, Ready, Error)
-    Phase string `json:"phase,omitempty"`
-    
-    // +kubebuilder:validation:Optional
-    // Human-readable message describing the current status
-    Message string `json:"message,omitempty"`
 }
 ```
 
