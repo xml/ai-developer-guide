@@ -8,6 +8,9 @@
     },
     {
       "pattern": "^https://code\\.visualstudio\\.com/"
+    },
+    {
+      "pattern": "^https://allcontributors\\.org/"
     }
   ],
   "replacementPatterns": [
